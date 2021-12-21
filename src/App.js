@@ -4,10 +4,22 @@ import React, {useState, useEffect} from 'react';
 // import BarChart from './components/BarChart';
 import SalesChart from './components/Sales'
 
+import database from './firebase';
+import { getDatabase, ref, set, onValue } from 'firebase/database'
+import { CounterRef } from '@amcharts/amcharts5/.internal/core/util/Counter';
+import { net } from '@amcharts/amcharts4/core';
 
 function App() {
 
-  const initialHomeValue = Number(localStorage.getItem("homeValue") || 100000);
+
+  //firebase
+  const [name , setName] = useState([]);
+  const [age, setAge] = useState([]);
+
+
+
+
+  const initialHomeValue = Number(localStorage.getItem("homeValue") || 0);
   const initialZipCode = Number(localStorage.getItem("zipCode") || 90210);
   const initialTakeHomePay = Number(localStorage.getItem("takeHomePay") || 0);
   const initialMarketValue = Number(localStorage.getItem("marketValue") || 0);
@@ -23,15 +35,23 @@ function App() {
   const [downPayment, setDownPayment] = useState(initialDownPayment);
   const [interestRate, setInterestRate] = useState(initialInterestRate);
 
+  
 
-  //api test
-  const [comments,setComments]=useState([])
 
-  const fetchComments=async()=>{
-    const response=await Axios('https://jsonplaceholder.typicode.com/comments');
-    setComments(response.data)    
-  }
+//database
+    const db = getDatabase();
+    set(ref(db), {
+      username: name,
+      age: age,
+    });
 
+  // //api test
+  // const [comments,setComments]=useState([])
+
+  // const fetchComments=async()=>{
+  //   const response=await Axios('https://jsonplaceholder.typicode.com/comments');
+  //   setComments(response.data)    
+  // }
 
   useEffect(() => {
     localStorage.setItem("homeValue", homeValue);
@@ -41,8 +61,11 @@ function App() {
     localStorage.setItem("payoffCost", payoffCost);
     localStorage.setItem("downPayment", downPayment);
     localStorage.setItem("interestRate", interestRate);
-    fetchComments();
+    // fetchComments();
 
+    
+
+    
 
     //currency format
     var formatter = new Intl.NumberFormat('en-US', {
@@ -55,10 +78,33 @@ function App() {
       //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
     
+    
     //calcs
-    let updatedHomeValue = takeHomePay * 2;
+    function PV(rate, nper, pmt)
+    {
+        return pmt / rate * (1 - Math.pow(1 + rate, -nper));
+    }
+
+
+    let updatedHomeValue = (PV((interestRate/100/12),360,(takeHomePay*0.2*.65/12))
+      +(marketValue * (1-.095)) - payoffCost + downPayment) * (1-0.035) ;
+    updatedHomeValue = -Math.round(-updatedHomeValue / 1000) * 1000;
+    var lowerBoundHomeValue = updatedHomeValue * 0.8 / 1000;
+    var upperBoundHomeValue = updatedHomeValue / 1000;
     updatedHomeValue = formatter.format(updatedHomeValue); /* $x,xxx */
     setHomeValue(updatedHomeValue);
+
+    
+    console.log(lowerBoundHomeValue);
+    
+
+      //dynamic link
+    // https://www.redfin.com/zipcode/21237/filter/min-price=100k,max-price=200k
+    var link = "https://www.redfin.com/zipcode/" + zipCode
+    + "/filter/min-price=" + lowerBoundHomeValue + "k,max-price=" + upperBoundHomeValue+"k";
+    document.getElementById('myLink').setAttribute("href",link);
+    // document.getElementById('myLink').innerHTML = "Search Redfin";
+  
   
   }, [zipCode, takeHomePay, marketValue, payoffCost, downPayment, interestRate])
 
@@ -67,10 +113,17 @@ function App() {
     
     <div className="App">
       <body>
-        <header></header>
+        <header>
+        <ul>
+              <li><a class="current-nav-element" href="#main">Calculator</a></li>
+              <li><a class="" href="#sales-db">Sales Dashboard</a></li>
+              <li>Dashboard</li>
+              
+            </ul>
+        </header>
         <div id="main">
 
-          <article>
+          <article id='calculator'>
           <div class="title-section">
             <h1>How Much Home Can You Afford?</h1>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
@@ -88,7 +141,7 @@ function App() {
 
                     <div class="question">
                       <label>
-                        2. What is your monthly income after taxes?
+                        2. What is your annual gross income?
                       </label>
                         <input type="number" value={takeHomePay} onChange={(e)=> setTakeHomePay(parseInt(e.target.value))}/>
                     </div>
@@ -97,28 +150,28 @@ function App() {
                       <label>
                         3. What is the market value of the home you are selling?
                       </label>
-                        <input type="number" value={zipCode} onChange={(e)=> setZipCode(parseInt(e.target.value))}/>
+                        <input type="number" value={marketValue} onChange={(e)=> setMarketValue(parseInt(e.target.value))}/>
                     </div>
 
                     <div class="question">
                       <label>
                         4. What is the payoff cost on the home you are selling?
                       </label>
-                        <input type="number" value={zipCode} onChange={(e)=> setZipCode(parseInt(e.target.value))}/>
+                        <input type="number" value={payoffCost} onChange={(e)=> setPayoffCost(parseInt(e.target.value))}/>
                     </div>
 
                     <div class="question">
                       <label>
                         5. How much do you have for a downpayment?
                       </label>
-                        <input type="number" value={zipCode} onChange={(e)=> setZipCode(parseInt(e.target.value))}/>
+                        <input type="number" value={downPayment} onChange={(e)=> setDownPayment(parseInt(e.target.value))}/>
                     </div>
 
                     <div class="question">
                       <label>
                         6. What interest rate will you have on your new mortgage?
                       </label>
-                        <input type="number" value={zipCode} onChange={(e)=> setZipCode(parseInt(e.target.value))}/>
+                        <input type="number" value={interestRate} onChange={(e)=> setInterestRate(parseFloat(e.target.value))}/>
                     
                     </div>
               </form>
@@ -127,10 +180,7 @@ function App() {
               <h2>Home Value</h2>
               <div class="home-value">{homeValue}</div>
               <div class="home-value-text">You can afford a <span>{homeValue}</span> house</div>
-              <h3>Historical Mortgage Rates</h3>
-              <div class="sales-chart">
-                <SalesChart />
-              </div>
+              <a id="myLink" href="link" target="_blank"><button>Search Redfin</button></a>
             </div>
 
           </div>
@@ -153,26 +203,38 @@ function App() {
 
           </article>
           <nav>
-            <ul>
-              <li>
-                <span>  -  </span>
-                <span>Title</span>
-              </li>
+            {/* <ul>
               <li>Home</li>
-              <li>Dashboard</li>
-              <li>Analysis</li>
               <li class="current-nav-element">Calculator</li>
-            </ul>
+              <li>Sales Database</li>
+              <li>Dashboard</li>
+              
+            </ul> */}
           </nav>
-          <aside></aside>
+
         </div>
-        <footer></footer>
+
 
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
       </body>
+      <div class="sales-db" id='sales-db'>
+            <h1>Sales Database</h1>
+            <input placeholder="Enter your name" value={name} 
+            onChange={(e) => setName(e.target.value)}/>
+            <br/><br/>
+            <input placeholder="Enter your age" value={age} 
+            onChange={(e) => setAge(e.target.value)}/>
+            <br/><br/> 
+            <button onClick={Set}>PUSH</button>
+          </div>
+          <div class="sales-chart">
+                <SalesChart />
+                
+          </div>
     </div>
+
   );
 }
 

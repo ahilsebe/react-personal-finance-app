@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Questrial:wght@200;300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Questrial:wght@200;300;400;600;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
 
 * {
@@ -8,7 +8,7 @@
 }
 body {
   display: flex;
-  min-height: 100vh;
+  /* min-height: 100vh; */
   flex-direction: column;
   margin: 0;
   background-color: #f2f3f8;
@@ -27,13 +27,18 @@ body {
 }
 #main > nav {
   order: -1;
-  flex: 0 0 12.5vw;
+  flex: 0 0 0vw;
   display: flex;
-  background-color: #fff;
+
+
+
 }
 header, footer {
   background: gray;
-  height: 0vh;
+  height: 1rem;
+  background-color: #fff;
+  top: 0;
+  position: fixed;
 }
 header, footer, article, nav, aside {
   padding: 0rem;
@@ -43,17 +48,44 @@ p {
   text-align: left;
 }
 
+main {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid #3eb489;
+  text-align: right;
+  
+}
+
+.sales-db {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #fff;
+}
 .content-box {
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  height: 640px;
+  height: 40rem;
 }
 
 .input-form {
   background-color:#fff;
   width: 60%;
-  margin: 4rem 2rem 4rem 4rem;
+  margin: 4rem 2rem 4rem 8rem;
   border-radius: 4px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
@@ -62,41 +94,74 @@ p {
 .value-return {
   background-color:#fff;
   width: 40%;
-  margin: 4rem 4rem 4rem 2rem;
+  margin: 4rem 8rem 4rem 2rem;
   border-radius: 4px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
+.value-return button {
+  color:#fff;
+  padding: 1rem;
+  margin: 3rem 1rem 1rem 1rem;
+  background: #3eb489;
+  cursor: pointer;
+  border: 1px transparent;
+  border-radius: 4px;
+  text-decoration: none;
+
+}
+
+/* #myLink {
+  color:#fff;
+  margin: 3rem;
+  padding: 1rem 1rem;
+  background: #3eb489;
+  cursor: pointer;
+  border: 1px transparent;
+  border-radius: 4px;
+  text-decoration: none;
+
+} */
+
+
+
 ul {
   display: flex;
-  flex: 0 0 12.5vw;
-  flex-direction: column;
-  align-items: stretch;
+  flex: 0 0 100vw;
+  flex-direction: row;
   padding: 0;
   margin: 0;
-  border-bottom: 1px red;
+  width: 100vw;
+  justify-content: center;
+  align-content: center;
+  background: #3eb489;
+  
 
 }
 
 li {
+  display: flex;
   list-style-type: none;
-  padding: 2rem 0rem 2rem 2rem;
-  text-align: left;
+  padding: 1rem 3rem 1rem 3rem;
+  text-align: center;
   margin: 0 0 0 0rem;
   font-size: 1rem;
-  font-weight: 400;
+  align-items: center;
+  justify-content: center;
+  color: black;
 
 }
 
 .title-section { 
   text-align: left;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  margin: 6rem 4rem 3rem 4rem;
+  margin: 8rem 4rem 1rem 8rem;
 }
 
 .title-section h1 {
   font-size: 3rem;
+  font-weight: 600;
+  margin: 8rem, 0rem, 3rem, 0rem;
+  color:rgb(59, 59, 59);
 }
 
 .title-section p {
@@ -104,6 +169,7 @@ li {
   width: 80%;
   font-size: 1rem;
   color: gray;
+  font-weight: 200;
 }
 
 
@@ -113,6 +179,7 @@ h2{
   font-weight: 600;
   font-family: Montserrat, sans-serif;
   margin: 2rem 2rem 4rem 2rem;
+  color: rgb(59, 59, 59)
 
 }
 
@@ -135,8 +202,8 @@ h2{
   display: flex;
   justify-content: space-between;
   margin: 2rem;
-  height: 24px;
-  line-height: 24px;
+  height: 1.5rem;
+  line-height: 1.5rem;
   
 }
 
@@ -146,8 +213,8 @@ h2{
 }
 
 .current-nav-element {
-  background: #3eb489;
   color: #fff;
+  font-weight: 600;
 }
 
 .sales-chart {
@@ -155,7 +222,7 @@ h2{
   align-items: stretch;
   margin: 2rem 2rem 0rem 2rem;
   font-size: 0.8rem;
-  height: 200px;
+  height: 100%;
 }
 
 .value-return h2 {
@@ -163,7 +230,8 @@ h2{
   text-align: left;
   font-weight: 600;
   font-family: Montserrat, sans-serif;
-  margin: 2rem 2rem 4rem 2rem;
+  margin: 2rem 2rem 9rem 2rem;
+  color: rgb(59, 59, 59)
 }
 
 .value-return h3 {
@@ -172,4 +240,10 @@ h2{
   font-weight: 600;
   font-family: Montserrat, sans-serif;
   margin: 2rem 2rem 2rem 2rem;
+  color: rgb(59, 59, 59)
+}
+
+a {
+  text-decoration: none;
+  color:rgb(59, 59, 59);
 }
