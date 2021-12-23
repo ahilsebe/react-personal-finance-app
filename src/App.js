@@ -1,13 +1,15 @@
 import './App.css';
-import Axios from 'axios';
+import axios from 'axios';
 import React, {useState, useEffect} from 'react';
 // import BarChart from './components/BarChart';
-import SalesChart from './components/Sales'
+import SalesChart from './components/EthChart'
+import BTCChart from './components/BTCChart'
 
 import database from './firebase';
 import { getDatabase, ref, set, onValue } from 'firebase/database'
 import { CounterRef } from '@amcharts/amcharts5/.internal/core/util/Counter';
 import { net } from '@amcharts/amcharts4/core';
+import { BarChart } from 'recharts';
 
 function App() {
 
@@ -35,8 +37,26 @@ function App() {
   const [downPayment, setDownPayment] = useState(initialDownPayment);
   const [interestRate, setInterestRate] = useState(initialInterestRate);
 
+  const initialSentiment = "";
+  const [sentiment, setSentiment] = useState(initialSentiment);
   
+// //trading sentiment api
+//  //get api data
+ axios
+ // .get("http://dummy.restapiexample.com/api/v1/employees")
+ .get("https://min-api.cryptocompare.com/data/tradingsignals/intotheblock/latest?fsym=BTC&api_key={e6a54e3b9523cbc86de7aaec8faeea1c198adfd5ce0505318ec00b9fdf86e142}")
+ .then(res => {
 
+   const dataObj = res.data.Data.addressesNetGrowth.sentiment;
+   console.log(dataObj);
+  //  dataObj = dataObj.toUpperCase();
+   setSentiment(dataObj);
+
+
+ })
+ .catch(err => {
+   console.log(err);
+ })
 
 //database
     const db = getDatabase();
@@ -234,20 +254,41 @@ function App() {
 
 
       <div class="dashboard" id="crypto-dashboard">
+      
       <h1>Crypto Dashboard</h1>
         <div class="dashboard-container">
- 
-        <div class="sales-chart">
-                <h2>ETH Minute Chart</h2>
-                <SalesChart />
-                
-        </div>
 
-        <div class="sales-chart">
-                <h2>BTC Daily Chart</h2>
-                <SalesChart />
-                
+          <div class="dashboard-container-row">
+            
+        <div class="sales-chart-small">
+            <h2>Crytpo Market Sentiment</h2>
+            <h1>{ sentiment }</h1>
+
         </div>
+        <div class="sales-chart-small-wide">
+            <h2>Commentary</h2>
+            <p> - Wen Lambo?</p>
+            <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+       
+   
+        </div>
+            
+          </div>
+
+          <div class="dashboard-container-row">
+          <div class="sales-chart">
+            <h2>ETH Price by</h2>
+            <SalesChart />
+        </div>
+        <div class="sales-chart">
+            <h2>BTC Price by Minute</h2>
+            <BTCChart />
+   
+        </div>
+            
+          </div>
+        
 
 
         </div>

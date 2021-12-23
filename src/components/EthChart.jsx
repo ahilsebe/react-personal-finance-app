@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import SalesData from "./SalesData"
+// import SalesData from "./SalesData"
 import axios from "axios";
 
 export default class Sales extends Component {
@@ -13,7 +13,7 @@ export default class Sales extends Component {
     //get api data
     axios
       // .get("http://dummy.restapiexample.com/api/v1/employees")
-      .get("https://min-api.cryptocompare.com/data/v2/histominute?fsym=ETH&tsym=USD&limit=20&api_key={e6a54e3b9523cbc86de7aaec8faeea1c198adfd5ce0505318ec00b9fdf86e142}")
+      .get("https://min-api.cryptocompare.com/data/v2/histominute?fsym=ETH&tsym=USD&limit=24&api_key={e6a54e3b9523cbc86de7aaec8faeea1c198adfd5ce0505318ec00b9fdf86e142}")
       .then(res => {
 
         const dataObj = res.data.Data.Data;
@@ -47,6 +47,8 @@ export default class Sales extends Component {
     series3.tensionX = 0.7;
     series3.yAxis = valueAxis1;
     series3.tooltipText = "[font-size: 12]{name}: [bold font-size: 12]{valueY}[/]";
+    series3.fontSize = 4;
+
 
     let bullet3 = series3.bullets.push(new am4charts.CircleBullet());
     bullet3.circle.radius = 3;
