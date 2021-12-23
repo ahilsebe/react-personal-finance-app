@@ -219,10 +219,22 @@ h2{
 
 .sales-chart {
   display: flex;
-  align-items: stretch;
-  margin: 2rem 2rem 0rem 2rem;
+  align-items:stretch;
+  flex-direction: column;
+  margin: 2rem 8rem 0rem rem;
   font-size: 0.8rem;
-  height: 100%;
+  width: 40%;
+  height: 340px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+}
+
+.sales-chart h2 {
+  margin: 1rem 1rem 0rem 1rem;
+  font-size: 1.2rem;
+  color:rgb(59, 59, 59);
+  text-align: center;
 }
 
 .value-return h2 {
@@ -246,4 +258,33 @@ h2{
 a {
   text-decoration: none;
   color:rgb(59, 59, 59);
+}
+
+
+
+
+.dashboard {
+  width: 100vw;
+  height: 95vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #f2f3f8;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+.dashboard h1 {
+  margin: 6rem 0rem 6rem 0rem;
+  align-items: center;
+  font-size: 3rem;
+  color:rgb(59, 59, 59);
+
 }

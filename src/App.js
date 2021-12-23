@@ -116,8 +116,8 @@ function App() {
         <header>
         <ul>
               <li><a class="current-nav-element" href="#main">Calculator</a></li>
-              <li><a class="" href="#sales-db">Sales Dashboard</a></li>
-              <li>Dashboard</li>
+              <li><a class="" href="#sales-db">Sales Database</a></li>
+              <li><a class="" href="#crypto-dashboard">Crypto Dashboard</a></li>
               
             </ul>
         </header>
@@ -228,11 +228,34 @@ function App() {
             onChange={(e) => setAge(e.target.value)}/>
             <br/><br/> 
             <button onClick={Set}>PUSH</button>
-          </div>
-          <div class="sales-chart">
+
+      </div>
+
+
+
+      <div class="dashboard" id="crypto-dashboard">
+      <h1>Crypto Dashboard</h1>
+        <div class="dashboard-container">
+ 
+        <div class="sales-chart">
+                <h2>ETH Minute Chart</h2>
                 <SalesChart />
                 
-          </div>
+        </div>
+
+        <div class="sales-chart">
+                <h2>BTC Daily Chart</h2>
+                <SalesChart />
+                
+        </div>
+
+
+        </div>
+        <h1></h1>
+
+
+      </div>
+
     </div>
 
   );
