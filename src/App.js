@@ -278,11 +278,11 @@ function App() {
 
           <div class="dashboard-container-row">
           <div class="sales-chart">
-            <h2>ETH Price by</h2>
+            <h2>ETH Price by the Minute</h2>
             <SalesChart />
         </div>
         <div class="sales-chart">
-            <h2>BTC Price by Minute</h2>
+            <h2>BTC Price by the Minute</h2>
             <BTCChart />
    
         </div>
