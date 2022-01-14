@@ -19,6 +19,7 @@
     "react-ionicons": "^4.2.0",
     "react-scripts": "^3.4.4",
     "recharts": "^2.1.8",
+    "rsuite": "^5.4.4",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

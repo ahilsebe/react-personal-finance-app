@@ -6,6 +6,10 @@
   /* font-size: 16px; */
   font-family: 'Questrial', sans-serif;
 }
+
+html {
+  margin: 0;
+}
 body {
   display: flex;
   /* min-height: 100vh; */
@@ -35,7 +39,7 @@ body {
 }
 header, footer {
   background: gray;
-  height: 1rem;
+  height: 0rem;
   background-color: #fff;
   top: 0;
   position: fixed;
@@ -50,11 +54,8 @@ p {
 
 main {
   width: 100vw;
-  height: 100vh;
-  min-height: 100%;
+  height: 200vh;
   box-sizing: border-box;
-  overflow-x: hidden;
-  overflow-y: hidden;
 }
 
 input {
@@ -63,6 +64,7 @@ input {
   background: transparent;
   border-bottom: 1px solid #3eb489;
   text-align: right;
+  font-size: 1rem;
   
 }
 
@@ -86,7 +88,7 @@ input {
   background-color:#fff;
   width: 60%;
   margin: 4rem 2rem 4rem 8rem;
-  border-radius: 4px;
+  border-radius: 20px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 
 }
@@ -95,7 +97,7 @@ input {
   background-color:#fff;
   width: 40%;
   margin: 4rem 8rem 4rem 2rem;
-  border-radius: 4px;
+  border-radius: 20px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
@@ -106,7 +108,7 @@ input {
   background: #3eb489;
   cursor: pointer;
   border: 1px transparent;
-  border-radius: 4px;
+  border-radius: 20px;
   text-decoration: none;
 
 }
@@ -134,7 +136,7 @@ ul {
   width: 100vw;
   justify-content: center;
   align-content: center;
-  background: #3eb489;
+  background: #fff;
   
 
 }
@@ -204,17 +206,18 @@ h2{
   margin: 2rem;
   height: 1.5rem;
   line-height: 1.5rem;
+  font-size: 1rem;
   
 }
 
 .question label {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: gray;
   text-align: left;
 }
 
 .current-nav-element {
-  color: #fff;
+  color: #5741d9;
   font-weight: 600;
 }
 
@@ -247,7 +250,7 @@ a {
 
 .dashboard {
   width: 100vw;
-  height: 95vh;
+  height: 100vh;
   min-height: 100%;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -260,7 +263,7 @@ a {
   /* align-items: center; */
   justify-content: space-evenly;
   flex-direction: column;
-  margin: 1rem;
+  margin: 2rem 4rem 2rem 4rem;
 
 }
 
@@ -269,7 +272,7 @@ a {
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  margin: 1rem;
+  margin: 2rem;
 
 }
 
@@ -287,9 +290,10 @@ a {
   align-items:stretch;
   flex-direction: column;
   font-size: 0.8rem;
-  width: 26%;
+  width: 15%;
   height: 200px;
-  background: white;
+  background: #5741d9;
+  color: #fff;
   border-radius: 20px;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
@@ -316,17 +320,16 @@ a {
 .sales-chart-small h2 {
   margin: 1rem 1rem 0rem 1rem;
   font-size: 1rem;
-  color:rgb(59, 59, 59);
+  color: #fff;
   text-align: left;
 }
 .sales-chart-small h1 {
 
   margin: 3rem 1rem 0rem 1rem;
   font-size: 2.5rem;
-  color:rgb(59, 59, 59);
+  color: #fff;
   text-align: center;
   vertical-align: middle;
-  color: red;
 }
 
 .sales-chart-small-wide {
@@ -334,7 +337,7 @@ a {
   align-items:stretch;
   flex-direction: column;
   font-size: 0.8rem;
-  width: 62%;
+  width: 54%;
   height: 200px;
   background: white;
   border-radius: 20px;
@@ -355,4 +358,14 @@ a {
   font-size: 0.8rem;
   color:rgb(59, 59, 59);
   text-align: left;
+}
+
+.financial-advisor {
+  width: 100vw;
+  height: 95vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #fff;
 }

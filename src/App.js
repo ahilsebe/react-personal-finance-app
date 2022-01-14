@@ -1,3 +1,16 @@
+// array to json for house chart
+
+//moving states comparison tax tool
+  //state and local income tax, property tax, sales tax
+
+
+
+// git remote -v
+// git add .
+// git commit -m "My first commit"
+// git push
+
+
 import './App.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -13,13 +26,9 @@ import { BarChart } from 'recharts';
 
 function App() {
 
-
   //firebase
   const [name , setName] = useState([]);
   const [age, setAge] = useState([]);
-
-
-
 
   const initialHomeValue = Number(localStorage.getItem("homeValue") || 0);
   const initialZipCode = Number(localStorage.getItem("zipCode") || 90210);
@@ -47,11 +56,10 @@ function App() {
  .get("https://min-api.cryptocompare.com/data/tradingsignals/intotheblock/latest?fsym=BTC&api_key={e6a54e3b9523cbc86de7aaec8faeea1c198adfd5ce0505318ec00b9fdf86e142}")
  .then(res => {
 
-   const dataObj = res.data.Data.addressesNetGrowth.sentiment;
+   const dataObj = res.data.Data.addressesNetGrowth.score;
    console.log(dataObj);
   //  dataObj = dataObj.toUpperCase();
-   setSentiment(dataObj);
-
+   setSentiment(Math.round(dataObj * 100));
 
  })
  .catch(err => {
@@ -83,10 +91,6 @@ function App() {
     localStorage.setItem("interestRate", interestRate);
     // fetchComments();
 
-    
-
-    
-
     //currency format
     var formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
@@ -98,34 +102,25 @@ function App() {
       //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
     
-    
     //calcs
     function PV(rate, nper, pmt)
     {
         return pmt / rate * (1 - Math.pow(1 + rate, -nper));
     }
 
-
-    let updatedHomeValue = (PV((interestRate/100/12),360,(takeHomePay*0.2*.65/12))
-      +(marketValue * (1-.095)) - payoffCost + downPayment) * (1-0.035) ;
+    let updatedHomeValue = (PV((interestRate/100/12),360,(takeHomePay*0.25*.60/12))
+      +(marketValue * (1-.09)) - payoffCost + downPayment) * (1-0.035) ;
     updatedHomeValue = -Math.round(-updatedHomeValue / 1000) * 1000;
     var lowerBoundHomeValue = updatedHomeValue * 0.8 / 1000;
     var upperBoundHomeValue = updatedHomeValue / 1000;
     updatedHomeValue = formatter.format(updatedHomeValue); /* $x,xxx */
     setHomeValue(updatedHomeValue);
 
-    
-    console.log(lowerBoundHomeValue);
-    
-
-      //dynamic link
-    // https://www.redfin.com/zipcode/21237/filter/min-price=100k,max-price=200k
+    //dynamic link
     var link = "https://www.redfin.com/zipcode/" + zipCode
     + "/filter/min-price=" + lowerBoundHomeValue + "k,max-price=" + upperBoundHomeValue+"k";
     document.getElementById('myLink').setAttribute("href",link);
-    // document.getElementById('myLink').innerHTML = "Search Redfin";
-  
-  
+
   }, [zipCode, takeHomePay, marketValue, payoffCost, downPayment, interestRate])
 
 
@@ -138,10 +133,11 @@ function App() {
               <li><a class="current-nav-element" href="#main">Calculator</a></li>
               <li><a class="" href="#sales-db">Sales Database</a></li>
               <li><a class="" href="#crypto-dashboard">Crypto Dashboard</a></li>
+              <li><a class="" href="#fa">Retirement</a></li>
               
             </ul>
         </header>
-        <div id="main">
+        <div class="home" id="main">
 
           <article id='calculator'>
           <div class="title-section">
@@ -204,9 +200,6 @@ function App() {
             </div>
 
           </div>
-
-             
-            
                 {/* {
             comments && comments.map(comment=>{
               return(
@@ -218,8 +211,6 @@ function App() {
 
             })
           } */}
-
-
 
           </article>
           <nav>
@@ -234,8 +225,6 @@ function App() {
 
         </div>
 
-
-
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
       </body>
@@ -248,10 +237,7 @@ function App() {
             onChange={(e) => setAge(e.target.value)}/>
             <br/><br/> 
             <button onClick={Set}>PUSH</button>
-
       </div>
-
-
 
       <div class="dashboard" id="crypto-dashboard">
       
@@ -261,28 +247,31 @@ function App() {
           <div class="dashboard-container-row">
             
         <div class="sales-chart-small">
-            <h2>Crytpo Market Sentiment</h2>
+            <h2>Market Sentiment</h2>
             <h1>{ sentiment }</h1>
-
         </div>
+
+        <div class="sales-chart-small">
+            <h2>TBD</h2>
+            {/* <h1>{ sentiment }</h1> */}
+        </div>
+
         <div class="sales-chart-small-wide">
             <h2>Commentary</h2>
             <p> - Wen Lambo?</p>
             <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-       
-   
         </div>
             
           </div>
 
           <div class="dashboard-container-row">
           <div class="sales-chart">
-            <h2>ETH Price by the Minute</h2>
+            <h2>ETH Hourly</h2>
             <SalesChart />
         </div>
         <div class="sales-chart">
-            <h2>BTC Price by the Minute</h2>
+            <h2>BTC Hourly</h2>
             <BTCChart />
    
         </div>
@@ -295,6 +284,11 @@ function App() {
         <h1></h1>
 
 
+      </div>
+
+      <div class="financial-advisor" id="fa">
+        <h1>Hi</h1>
+        <p>-Model retirement w/ annual contribution amount, sliders for hist. avg. index return amount, then +/- for advisor w/ +/- for fee</p>
       </div>
 
     </div>
