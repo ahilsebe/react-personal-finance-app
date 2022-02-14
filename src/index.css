@@ -245,7 +245,15 @@ a {
   color:rgb(59, 59, 59);
 }
 
-
+.home {
+  width: 100vw;
+  height: 100vh;
+  min-height: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background: #f2f3f8;
+}
 
 
 .dashboard {
@@ -368,4 +376,51 @@ a {
   overflow-x: hidden;
   overflow-y: hidden;
   background: #fff;
+}
+
+.valentine {
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background: #ff8ba7; 
+  height: 100vh;
+  width: 100vw;
+}
+
+
+.valentine-1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgb(201, 0, 0);
+  text-align: center;
+}
+.valentine-2 {
+  font-size: 2.5rem;
+  color: rgb(201, 0, 111);
+  text-align: center;
+  justify-content: center;
+}
+.valentine-3 {
+  font-size: 2.5rem;
+  color: rgb(201, 0, 0);
+  text-align: center;
+  justify-content: center;
+}
+.valentine-4 {
+  font-size: 2.5rem;
+  color: rgb(201, 0, 111);
+  text-align: center;
+  justify-content: center;
+}
+
+.middle {
+
+}
+
+.bottom {
+  text-align: center;
+  justify-content: center;
+  color: white;
+  font-style: italic;
 }
