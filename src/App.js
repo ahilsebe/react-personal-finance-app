@@ -1,16 +1,3 @@
-// array to json for house chart
-
-//moving states comparison tax tool
-  //state and local income tax, property tax, sales tax
-
-
-
-// git remote -v
-// git add .
-// git commit -m "My first commit"
-// git push
-
-
 import './App.css';
 import axios from 'axios';
 import React, {useState, useEffect} from 'react';
@@ -116,10 +103,10 @@ function App() {
     updatedHomeValue = formatter.format(updatedHomeValue); /* $x,xxx */
     setHomeValue(updatedHomeValue);
 
-    // //dynamic link
-    // var link = "https://www.redfin.com/zipcode/" + zipCode
-    // + "/filter/min-price=" + lowerBoundHomeValue + "k,max-price=" + upperBoundHomeValue+"k";
-    // document.getElementById('myLink').setAttribute("href",link);
+    //dynamic link
+    var link = "https://www.redfin.com/zipcode/" + zipCode
+    + "/filter/min-price=" + lowerBoundHomeValue + "k,max-price=" + upperBoundHomeValue+"k";
+    document.getElementById('myLink').setAttribute("href",link);
 
   }, [zipCode, takeHomePay, marketValue, payoffCost, downPayment, interestRate])
 
@@ -127,24 +114,170 @@ function App() {
   return (
     
     <div className="App">
-      <div className="valentine">
-        <div className="top">
-          <h1 className="valentine-1">Happy</h1>
-          <h1 className="valentine-2">Valentine's</h1>
-          <h1 className="valentine-3">Day,</h1>
-          <h1 className="valentine-4">Content!</h1>
+      <body>
+        <header>
+        <ul>
+              <li><a class="current-nav-element" href="#main">Calculator</a></li>
+              <li><a class="" href="#sales-db">Sales Database</a></li>
+              <li><a class="" href="#crypto-dashboard">Crypto Dashboard</a></li>
+              <li><a class="" href="#fa">Retirement</a></li>
+              
+            </ul>
+        </header>
+        <div class="home" id="main">
+
+          <article id='calculator'>
+          <div class="title-section">
+            <h1>How Much Home Can You Afford?</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </div>
+          <div class="content-box">
+            <div class="input-form">
+              <form>
+                <h2>Start Your Home Search with Financial Insight</h2>
+                    <div class="question">
+                      <label>
+                        1. In what zip code are you searching?
+                      </label>
+                        <input type="number" value={zipCode} onChange={(e)=> setZipCode(parseInt(e.target.value))}/>
+                    </div>
+
+                    <div class="question">
+                      <label>
+                        2. What is your annual gross income?
+                      </label>
+                        <input type="number" value={takeHomePay} onChange={(e)=> setTakeHomePay(parseInt(e.target.value))}/>
+                    </div>
+
+                    <div class="question">
+                      <label>
+                        3. What is the market value of the home you are selling?
+                      </label>
+                        <input type="number" value={marketValue} onChange={(e)=> setMarketValue(parseInt(e.target.value))}/>
+                    </div>
+
+                    <div class="question">
+                      <label>
+                        4. What is the payoff cost on the home you are selling?
+                      </label>
+                        <input type="number" value={payoffCost} onChange={(e)=> setPayoffCost(parseInt(e.target.value))}/>
+                    </div>
+
+                    <div class="question">
+                      <label>
+                        5. How much do you have for a downpayment?
+                      </label>
+                        <input type="number" value={downPayment} onChange={(e)=> setDownPayment(parseInt(e.target.value))}/>
+                    </div>
+
+                    <div class="question">
+                      <label>
+                        6. What interest rate will you have on your new mortgage?
+                      </label>
+                        <input type="number" value={interestRate} onChange={(e)=> setInterestRate(parseFloat(e.target.value))}/>
+                    
+                    </div>
+              </form>
+            </div>
+            <div class="value-return">
+              <h2>Home Value</h2>
+              <div class="home-value">{homeValue}</div>
+              <div class="home-value-text">You can afford a <span>{homeValue}</span> house</div>
+              <a id="myLink" href="link" target="_blank"><button>Search Redfin</button></a>
+            </div>
+
+          </div>
+                {/* {
+            comments && comments.map(comment=>{
+              return(
+                <div key={comment.id} style={{alignItems:'center',margin:'20px 60px'}}>
+                <h4>{comment.name}</h4>
+                <p>{comment.email}</p>
+              </div>
+              )
+
+            })
+          } */}
+
+          </article>
+          <nav>
+            {/* <ul>
+              <li>Home</li>
+              <li class="current-nav-element">Calculator</li>
+              <li>Sales Database</li>
+              <li>Dashboard</li>
+              
+            </ul> */}
+          </nav>
+
         </div>
-        <div  className="middle">
-        <img src="https://cdn-icons-png.flaticon.com/512/6774/6774468.png" width = "300"/>
-        </div>
-        <div className="bottom">
-          <p>Love,</p>
-          <p>Andrew & Mango</p>
-        </div>
+
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+      </body>
+      <div class="sales-db" id='sales-db'>
+            <h1>Sales Database</h1>
+            <input placeholder="Enter your name" value={name} 
+            onChange={(e) => setName(e.target.value)}/>
+            <br/><br/>
+            <input placeholder="Enter your age" value={age} 
+            onChange={(e) => setAge(e.target.value)}/>
+            <br/><br/> 
+            <button onClick={Set}>PUSH</button>
       </div>
 
-       
-     
+      <div class="dashboard" id="crypto-dashboard">
+      
+      <h1>Crypto Dashboard</h1>
+        <div class="dashboard-container">
+
+          <div class="dashboard-container-row">
+            
+        <div class="sales-chart-small">
+            <h2>Market Sentiment</h2>
+            <h1>{ sentiment }</h1>
+        </div>
+
+        <div class="sales-chart-small">
+            <h2>TBD</h2>
+            {/* <h1>{ sentiment }</h1> */}
+        </div>
+
+        <div class="sales-chart-small-wide">
+            <h2>Commentary</h2>
+            <p> - Wen Lambo?</p>
+            <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p> - Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+            
+          </div>
+
+          <div class="dashboard-container-row">
+          <div class="sales-chart">
+            <h2>ETH Hourly</h2>
+            <SalesChart />
+        </div>
+        <div class="sales-chart">
+            <h2>BTC Hourly</h2>
+            <BTCChart />
+   
+        </div>
+            
+          </div>
+        
+
+
+        </div>
+        <h1></h1>
+
+
+      </div>
+
+      <div class="financial-advisor" id="fa">
+        <h1>Hi</h1>
+        <p>-Model retirement w/ annual contribution amount, sliders for hist. avg. index return amount, then +/- for advisor w/ +/- for fee</p>
+      </div>
+
     </div>
 
   );
